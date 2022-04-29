@@ -3,6 +3,10 @@
 {%block title%}Home{%endblock%}
 
 {%block content%}
+<br>
+<a href="/admin/">Administrar</a>
+<br>
+
 {%for post in posts%}
     {{post[0]}}<br>
     <h2><a href="post/{{post[0]}}">{{post[3]}}</a></h2>

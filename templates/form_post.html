@@ -5,20 +5,20 @@
 {%block content%}
 <h2>Edición de post</h2>
 
-<form action="/guardar" method="post">
+<form action="/admin/guardar" method="post">
     <h2>Datos del post</h2>
-    <input type="hidden" id ="id" name="id" value="{% if post %}{{post[0]}} {%endif%}">
+    <input type="hidden" id ="id" name="id" value="{% if post %}{{post[0]}}{%endif%}">
     <label for="titulo">Titulo:</label>
-    <input type="text" id="titulo" name="titulo" value="{% if post %}{{post[3]}} {%endif%}"><br><br>
+    <input type="text" id="titulo" name="titulo" value="{% if post %}{{post[3]}}{%endif%}"><br><br>
     <label for="autor">Autor:</label>
-    <input type="text" id="autor" name="autor" value="{% if post %}{{post[2]}} {%endif%}"><br><br>
+    <input type="text" id="autor" name="autor" value="{% if post %}{{post[2]}}{%endif%}"><br><br>
     <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fecha" value="{% if post %}{{post[1]}} {%endif%}"><br><br>
+    <input type="date" id="fecha" name="fecha" value="{% if post %}{{post[1]}}{%endif%}"><br><br>
     <label for="cuerpo">Cuerpo:</label>
-    <textarea name="cuerpo" id="cuerpo" cols="30" rows="10">{% if post %}{{post[4]}} {%endif%}</textarea>
+    <textarea name="cuerpo" id="cuerpo" cols="30" rows="10">{% if post %}{{post[4]}}{%endif%}</textarea>
     <br>
     <input type="submit" value="Enviar">
-    <a href="/">Cancelar</a>
+    <a href="/admin/">Cancelar</a>
 </form>
 
 {%endblock%}

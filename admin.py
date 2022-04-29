@@ -79,14 +79,16 @@ def borrar(id):
 
     redirect('/')
 
-
+@route('/post')
 @route('/post/<id:int>')
-@jinja2_view('post.html')
-def ver_post(id):
-    bdatos = Sql(BD)
-    resp = bdatos.select(f'select * from posts where id ={id}')
-    return {'post' : resp[0]}
-
+@jinja2_view('form_post.html')
+def ver_post(id=None):
+    if id:
+        bdatos = Sql(BD)
+        resp = bdatos.select(f'select * from posts where id ={id}')
+        return {'post' : resp[0]}
+    else:
+        return {'post':None}
 
 
 run(host='localhost', port=8000,debug=True,reloader=True)

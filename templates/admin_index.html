@@ -3,8 +3,11 @@
 {%block title%}Admin_Home{%endblock%}
 
 {%block content%}
+<br>
+<a href="/">Inicio</a>
+<br>
 <h2>Edición de posts</h2>
-
+<a href="/admin/editar">Nuevo post</a>
 <table>
     <thead>
         <tr>
@@ -17,10 +20,10 @@
     <tbody>
         {%for post in posts%}
         <tr>
-            <td><a href="post/{{post[0]}}">{{post[3]}}</a></td>
+            <td><a href="/admin/post/{{post[0]}}">{{post[3]}}</a></td>
             <td>{{post[2]}}</td>
             <td>{{post[1]}}</td>
-            <td><a href="/editar/{{post[0]}}">Editar</a> <a href="/borrar/{{post[0]}}">Borrar</a></td>
+            <td><a href="/admin/editar/{{post[0]}}">Editar</a> <a href="/admin/borrar/{{post[0]}}">Borrar</a></td>
         </tr>
         {%endfor%}
     </tbody>

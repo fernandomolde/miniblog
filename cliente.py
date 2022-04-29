@@ -1,6 +1,7 @@
-from bottle import static_file,route,run,jinja2_view,TEMPLATE_PATH
+from bottle import static_file,route,run,jinja2_view,TEMPLATE_PATH,request,redirect
 from settings import STATIC_FILES,BD,TEMPLATES
 from sql import Sql
+from clase_post import Posts
 
 
 
@@ -39,7 +40,74 @@ def ver_post(id):
     resp = bdatos.select(f'select * from posts where id ={id}')
     return {'post' : resp[0]}
 
+# Parte de Administración
 
+@route('/admin/')
+@jinja2_view('admin_index.html')
+def home():
+    bdatos = Sql(BD)
+    resp = bdatos.select('select p.id, p.fecha,p.autor,p.titulo,p.cuerpo from posts p ')
+    resp = modifica_fecha(resp)
+    return {'posts' : resp}
+
+@route('/admin/editar')
+@route('/admin/editar/<id:int>')
+@jinja2_view('form_post.html')
+def mi_form(id=None):
+    bdatos = Sql(BD)
+    resp = None
+    if id:
+        resp = bdatos.select(f'select p.id, p.fecha,p.autor,p.titulo,p.cuerpo from posts p where id = {id}')
+    
+    #resp = modifica_fecha(resp)
+    if resp:
+        return {'post' : resp[0]}
+    else:
+        return {'post' : ''}
+
+
+@route('/admin/guardar', method='POST')
+def guardar(): 
+    if request.POST.id:
+        id = request.POST.id
+    else:
+        id = None
+
+    fecha = request.POST.fecha
+    autor = request.POST.autor
+    titulo = request.POST.titulo
+    cuerpo = request.POST.cuerpo
+   
+    p = Posts(id,fecha,autor,titulo,cuerpo)
+    
+    bdatos = Sql(BD)
+    if request.POST.id:
+        resp = bdatos.update(p)
+    else:
+        resp = bdatos.insert(p)
+
+    redirect('/admin/')
+
+
+@route('/admin/borrar')
+@route('/admin/borrar/<id:int>')
+def borrar(id):
+    p = Posts(id=id)
+    bdatos = Sql(BD)
+    bdatos.delete(p)
+
+    redirect('/admin/')
+
+@route('/admin/post')
+@route('/admin/post/<id:int>')
+@jinja2_view('form_post.html')
+def ver_post(id=None):
+    if id:
+        bdatos = Sql(BD)
+        resp = bdatos.select(f'select * from posts where id ={id}')
+        return {'post' : resp[0]}
+    else:
+        return {'post':None}
 
 
 run(host='localhost', port=8000,debug=True,reloader=True)
