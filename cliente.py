@@ -18,6 +18,14 @@ def modifica_fecha(lista_tuplas):
         salida.append(tmp_tupla)
     return salida
         
+def tupla_a_lista(mi_lista_tupla):
+    salida = []
+    for t in mi_lista_tupla:
+        salida.append(t[0]) #Suponemos que el id está en el primer lugar
+    
+    return salida
+
+
 
 @route('/static/<filename:path>')
 def server_static(filename):
@@ -55,15 +63,29 @@ def home():
 @jinja2_view('form_post.html')
 def mi_form(id=None):
     bdatos = Sql(BD)
-    resp = None
-    if id:
-        resp = bdatos.select(f'select p.id, p.fecha,p.autor,p.titulo,p.cuerpo from posts p where id = {id}')
+    posts = None
+    etiquetas = bdatos.select('select id,nombre from T_etiquetas')
+    categorias = bdatos.select('select id,nombre from T_categorias')
+    if id: #Estamos editando el post
+        posts = bdatos.select(f'select p.id, p.fecha,p.autor,p.titulo,p.cuerpo from posts p where id = {id}')
+        post_etiquetas = bdatos.select(f'select id_etiqueta from posts p join post_etiquetas pe on p.id = pe.id_post where p.id = {id};')
+        post_categorias = bdatos.select(f'select pc.id_categoria from posts p join post_categorias pc on p.id = pc.id_post where p.id = {id};')
+
+        mis_categorias = tupla_a_lista(post_categorias)
+        mis_etiquetas = tupla_a_lista(post_etiquetas)
     
     #resp = modifica_fecha(resp)
-    if resp:
-        return {'post' : resp[0]}
+
+    if posts:
+        return {'post' : posts[0], 
+                'etiquetas' : etiquetas,
+                'categorias': categorias,
+                'mis_etiquetas' : mis_etiquetas, 
+                'mis_categorias': mis_categorias}
     else:
-        return {'post' : ''}
+        return {'post' : '', 
+                'etiquetas' : etiquetas,
+                'categorias': categorias}
 
 
 @route('/admin/guardar', method='POST')

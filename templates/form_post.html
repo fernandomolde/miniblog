@@ -17,7 +17,31 @@
     <label for="cuerpo">Cuerpo:</label>
     <textarea name="cuerpo" id="cuerpo" cols="30" rows="10">{% if post %}{{post[4]}}{%endif%}</textarea>
     <br>
+    
+    <div class="column">
+        <h2 class="label">Categorias</h2>
+        <div class="control" required>
+          {%for c in categorias%}
+          <label class="checkbox" for="cat{{c[0]}}">
+            <input type="checkbox" id="cat{{c[0]}}" name="categoria" value="{{c[0]}}" {%if (mis_categorias) and c[0] in
+              mis_categorias%}checked{%endif%}>&nbsp;{{c[1]}}
+          </label><br>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+
+    
+    
+    
     <input type="submit" value="Enviar">
+   
+   
+   
+   
+   
     <a href="/admin/">Cancelar</a>
 </form>
 
