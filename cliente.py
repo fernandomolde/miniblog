@@ -18,9 +18,6 @@ def modifica_fecha(lista_tuplas):
     return salida
         
 
-
-
-
 @route('/static/<filename:path>')
 def server_static(filename):
     archivo = static_file(filename, root=STATIC_FILES)

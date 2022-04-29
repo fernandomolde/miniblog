@@ -13,7 +13,7 @@
     <label for="autor">Autor:</label>
     <input type="text" id="autor" name="autor" value="{% if post %}{{post[2]}} {%endif%}"><br><br>
     <label for="fecha">Fecha:</label>
-    <input type="text" id="fecha" name="fecha" value="{% if post %}{{post[1]}} {%endif%}"><br><br>
+    <input type="date" id="fecha" name="fecha" value="{% if post %}{{post[1]}} {%endif%}"><br><br>
     <label for="cuerpo">Cuerpo:</label>
     <textarea name="cuerpo" id="cuerpo" cols="30" rows="10">{% if post %}{{post[4]}} {%endif%}</textarea>
     <br>
