@@ -72,8 +72,8 @@ def guardar():
 
 @route('/borrar')
 @route('/borrar/<id:int>')
-def borrar(_id):
-    p = Posts(id=_id)
+def borrar(id):
+    p = Posts(id=id)
     bdatos = Sql(BD)
     bdatos.delete(p)
 
@@ -86,8 +86,6 @@ def ver_post(id):
     bdatos = Sql(BD)
     resp = bdatos.select(f'select * from posts where id ={id}')
     return {'post' : resp[0]}
-
-
 
 
 
