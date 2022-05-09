@@ -11,5 +11,15 @@
     <p>{{post[2]}} - {{post[1]}}</p>
     <p>{{post[4]}}</p>
     <br>
+    <p>Categorias:</p>
+    <p>{%for c in categorias%}
+        <a href="">{{c}}</a><br>
+        {%endfor%}
+    </p>
+    <p>Etiquetas:</p>
+    <p>{%for e in etiquetas%}
+        <a href="">{{e}}</a><br>
+        {%endfor%}
+    </p>
     <a href="/">Volver</a>
 {%endblock%}

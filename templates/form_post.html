@@ -17,8 +17,12 @@
     <label for="cuerpo">Cuerpo:</label>
     <textarea name="cuerpo" id="cuerpo" cols="30" rows="10">{% if post %}{{post[4]}}{%endif%}</textarea>
     <br>
+    <label for="categorias">Categorias:</label>
+    <input type="text" id="categorias" name="categorias" value="{% if post %}{{post[6]}}{%endif%}"><br><br>
+    <label for="etiquetas">Etiquetas:</label>
+    <input type="text" id="etiquetas" name="etiquetas" value="{% if post %}{{post[5]}}{%endif%}"><br><br>
     
-    <div class="column">
+    <!-- <div class="column">
         <h2 class="label">Categorias</h2>
         <div class="control" required>
           {%for c in categorias%}
@@ -29,7 +33,21 @@
           {%endfor%}
         </div>
       </div>
-    </div>
+
+      <br>
+    
+      <div class="column">
+          <h2 class="label">Etiquetas</h2>
+          <div class="control" required>
+            {%for e in etiquetas%}
+            <label class="checkbox" for="etq{{e[0]}}">
+              <input type="checkbox" id="etq{{e[0]}}" name="etiqueta" value="{{e[0]}}" {%if (mis_etiquetas) and e[0] in
+                mis_etiquetas%}checked{%endif%}>&nbsp;{{e[1]}}
+            </label><br>
+            {%endfor%}
+          </div>
+        </div>
+    </div> -->
     <br><br>
 
 
