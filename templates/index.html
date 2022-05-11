@@ -9,7 +9,7 @@
 
 {%for post in posts%}
     {{post[0]}}<br>
-    <h2><a href="post/{{post[0]}}">{{post[3]}}</a></h2>
+    <h2><a href="/post/{{post[0]}}">{{post[3]}}</a></h2>
     <p>{{post[4] |truncate(15)}}</p>
     <p>{{post[2]}} - {{post[1]}}</p>
     <hr>

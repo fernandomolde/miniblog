@@ -52,7 +52,12 @@ def ver_post(id):
             'categorias':cadena_a_lista(resp[0][5])}
 
 
-
+@route('/filtro/<etiqueta>')
+@jinja2_view('index.html')
+def ver_post(etiqueta):
+    bdatos = Sql(BD)
+    resp = bdatos.select(f'select * from posts p Where p.etiquetas like "%{etiqueta}%"')
+    return {'posts': resp}
 
 # Parte de Administración
 
